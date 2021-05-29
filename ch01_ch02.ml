@@ -48,4 +48,13 @@ let rec fib x = if x <= 1 then 1 else fib(x-1) + fib(x-2);;
 (*debug using print*)
 let testinc x y = 
   print_endline "Hello world!";
+  print_int x;
   x + y;;
+
+(*fast fib*)
+let rec fib_aux n pp p = 
+  if n = 1 
+     then p else 
+    fib_aux (n-1) p (pp+p);;
+
+let fib x = fib_aux x 0 1;;
