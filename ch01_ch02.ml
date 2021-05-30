@@ -10,7 +10,7 @@ let x = 5 in
 
 
 
-(* mutually recursive function *)
+(* mutually recursiqve function *)
 let rec even n =
   n = 0 || odd(n-1)
 
