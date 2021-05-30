@@ -129,3 +129,13 @@ let extract o =
   | None -> "";;
 extract (Some 42);;
 extract None;;
+
+
+(*use Option to define list_max*)
+let rec list_max = function
+  | [] -> None
+  | h::t -> begin
+      match list_max t with
+      | None -> Some h
+      | Some m -> Some (max h m)
+    end;;
