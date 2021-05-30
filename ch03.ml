@@ -139,3 +139,83 @@ let rec list_max = function
       | None -> Some h
       | Some m -> Some (max h m)
     end;;
+
+(*3.2.2 Association Lists*)
+let d = [("rectangle", 4); ("triangle", 3); ("dodecagon", 12)];;
+
+let insert k v d = (k, v)::d ;;
+let rec lookup k d =
+  match d with 
+  | [] -> None
+  | (k', v)::t -> if k=k' then Some v else lookup k t;;
+
+
+
+
+
+(*3.2.3 Type Synonyms*)
+type point = float * float ;;
+type vector = float list ;;
+type matrix = float list list;;
+
+(*3.2.4 Algebraic Data Type*)
+ 
+type shape =
+  | Point of point
+  | Circle of point * float
+  | Rect of point * point;;
+
+
+let pi = 3.1415926;;
+let area shape =
+  match shape with
+  | Point _ -> 0.0
+  | Circle (_, r) -> pi *. (r ** 2.0)
+  | Rect ((x1, y1), (x2, y2)) ->
+     let w = x2 -. x1 in
+     let h = y2 -. y1 in
+     w *. h;;
+
+let center = function
+  | Point p -> p
+  | Circle (p, _) -> p
+  | Rect ((x1, y1), (x2, y2)) ->
+     ((x2 +. x1 /. 2.0),
+      (y2 +. y1) /. 2.0);;
+
+(*Using variants, we can express a type that represents the union of several other types.*)
+
+type string_or_int =
+  | String of string
+  | Int of int;;
+type string_or_int_list = string_or_int list;;
+
+let rec sum: string_or_int_list -> int = function
+  | [] -> 0
+  | (String s)::t -> int_of_string s + sum t
+  | (Int i)::t -> i + sum t;;
+let three = sum [String "1"; Int 2];;
+
+(*3.2.4.2 Recursive Variants*)
+type intlist = Nil | Cons of int * intlist;;
+
+let lst3 = Cons (3, Nil);;
+let lst123 = Cons (1, Cons (2, lst3));;
+
+let rec sum (l:intlist) : int =
+  match l with
+  | Nil -> 0
+  | Cons (h, t) -> h + sum t;;
+
+let rec length : intlist -> int = function
+  | Nil -> 0
+  | Cons (_,t) -> 1 + length t;;
+
+let rec length01 l : intlist -> int  =
+  match l with
+  | Nil -> 0
+  | Cons (h, t) -> 1 + length t;;
+
+let empty : intlist -> bool = function
+  | Nil -> true
+  | Cons _ -> false;;
