@@ -7,13 +7,13 @@ let rec sum lst =
   | h::t -> h + sum t;;
 (* sum [1; 2; 3];; *)
 
-    (* _::[] matches all lists with exactly one element
-     * 
-     * _::_ matches all lists with at least one element
-     * 
-     * _::_::[] matches all lists with exactly two elements
-     * 
-     * _::_::_::_ matches all lists with at least three elements *)
+(* _::[] matches all lists with exactly one element
+ * 
+ * _::_ matches all lists with at least one element
+ * 
+ * _::_::[] matches all lists with exactly two elements
+ * 
+ * _::_::_::_ matches all lists with at least three elements *)
 
 
 
@@ -159,7 +159,7 @@ type vector = float list ;;
 type matrix = float list list;;
 
 (*3.2.4 Algebraic Data Type*)
- 
+
 type shape =
   | Point of point
   | Circle of point * float
@@ -207,15 +207,36 @@ let rec sum (l:intlist) : int =
   | Nil -> 0
   | Cons (h, t) -> h + sum t;;
 
-let rec length : intlist -> int = function
+let rec length : intlist -> int = fun l ->
+  match l with 
   | Nil -> 0
   | Cons (_,t) -> 1 + length t;;
 
-let rec length01 l : intlist -> int  =
+let rec length01 l =
   match l with
   | Nil -> 0
-  | Cons (h, t) -> 1 + length t;;
+  | Cons (_,t) -> 1 + length l;;
+
+let rec length02 (l:intlist) : int =
+  match l with
+  | Nil -> 0
+  | Cons (_,t) -> 1 + length l;;
 
 let empty : intlist -> bool = function
   | Nil -> true
   | Cons _ -> false;;
+
+(*3.2.4.3 Parameterized Variant*)
+type 'a mylist = Nil | Cons of 'a * 'a mylist;;
+
+
+(*3.2.4.4 Polymorphic Variants*)
+let f = function
+  | 0 -> `Infinity
+  | 1 -> `Finite 1
+  | n -> `Finite (-n);;
+
+match f 3 with
+| `NegInfinity -> "negative infinity"
+| `Finite n -> "finite"
+| `Infinity -> "infinite";;
