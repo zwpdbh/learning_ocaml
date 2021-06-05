@@ -129,3 +129,27 @@ unimodal [1;1;2;];;
 unimodal [2;1];;
 unimodal [1;1;1];;
 unimodal [1;2;4;5;2;3];;
+
+
+type student =
+  { first_name : string ; last_name : string ; gpa : float };;
+(* an expression has type: student*)
+let s01 = {first_name="zhao"; last_name="wei"; gpa=3.4};;
+(* an expression has type: student -> string * string*)
+let find_name s =
+  match s with
+  | {first_name; last_name; gpa} -> (first_name, last_name);;
+(* an expression has type: string -> string -> float -> student*)
+let create_student f l g =
+  {first_name=f; last_name=l; gpa=g};;
+
+
+type a' tree =
+  | Leaf
+  | Node of 'a node
+
+and 'a node = {
+    value: 'a;
+    left: 'a tree;
+    right: 'a tree
+  }
