@@ -8,11 +8,11 @@ let rec sum lst =
 (* sum [1; 2; 3];; *)
 
 (* _::[] matches all lists with exactly one element
- * 
+ *
  * _::_ matches all lists with at least one element
- * 
+ *
  * _::_::[] matches all lists with exactly two elements
- * 
+ *
  * _::_::_::_ matches all lists with at least three elements *)
 
 
@@ -28,7 +28,7 @@ let rec sum_plus_acc (acc : int) (l : int list) : int =
     [] -> acc
   | x :: xs -> sum_plus_acc (acc + x) xs;;
 
-let sum_tr : int list -> int = 
+let sum_tr : int list -> int =
   sum_plus_acc 0;;
 
 
@@ -37,7 +37,7 @@ type day = Sun | Mon | Tue | Wed | Thu | Fri | Sat ;;
 
 let int_of_day d =
   match d with
-  | Sun -> 1 
+  | Sun -> 1
   | Mon -> 2
   | Tue -> 3
   | Wed -> 4
@@ -52,10 +52,10 @@ let int_of_day d =
 
 
 (*3.1.4 Record, like struct in C.*)
-type ptype = 
+type ptype =
   TNormal | TFire | TWater
 
-type peff = 
+type peff =
   ENormal | ENotVery | ESuper
 
 (*ptype here is used as both a type name and a field name*)
@@ -107,7 +107,7 @@ let thrd t =
   | (x, y, z) -> z
 
 (* good *)
-let thrd t = 
+let thrd t =
   let (x,y,z) = t in z
 
 (* better *)
@@ -145,7 +145,7 @@ let d = [("rectangle", 4); ("triangle", 3); ("dodecagon", 12)];;
 
 let insert k v d = (k, v)::d ;;
 let rec lookup k d =
-  match d with 
+  match d with
   | [] -> None
   | (k', v)::t -> if k=k' then Some v else lookup k t;;
 
@@ -208,7 +208,7 @@ let rec sum (l:intlist) : int =
   | Cons (h, t) -> h + sum t;;
 
 let rec length : intlist -> int = fun l ->
-  match l with 
+  match l with
   | Nil -> 0
   | Cons (_,t) -> 1 + length t;;
 
