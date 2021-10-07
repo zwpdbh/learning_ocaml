@@ -60,14 +60,13 @@ let float_of_numer = function
 let add n1 n2 =
   match n1, n2 with
   | Zero, n
-    | n, Zero ->
-     n
+  | n, Zero ->
+    n
   | Integer i1, Integer i2 ->
-     Integer (i1 + i2)
+    Integer (i1 + i2)
   | Integer i, Real x
-    | Real x, Integer i ->
-     Real (x +. float_of_int i)
+  | Real x, Integer i ->
+    Real (x +. float_of_int i)
   | Real x1, Real x2 ->
-     Real (x1 +. x2);;
-
+    Real (x1 +. x2);;
 add x i;;
